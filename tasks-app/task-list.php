@@ -2,7 +2,7 @@
 
 require_once './database.php';
 
-$query = "SELECT * FROM task";
+$query = "SELECT * FROM task ORDER BY name ASC";
 $result = mysqli_query($connection, $query);
 
 if (!$result) {

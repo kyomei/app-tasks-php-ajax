@@ -40,8 +40,8 @@ $(function () {
       });
    });
 
+   // Select on table
    function fetchTasks() {
-      // Select on table
       $.ajax({
          url: 'task-list.php',
          type: 'GET',
@@ -50,20 +50,32 @@ $(function () {
             let template = '';
             tasks.forEach(task => {
                template += `
-               <tr>
+               <tr taskId="${task.id}">
                   <td>${task.id}</td>
-                  <td>${task.name}</td>
+                  <td><a href="#" class="task-item">${task.name}</a></td>
                   <td>${task.description}</td>
                   <td>
-                     <button class="btn btn-danger">Delete</button>
+                     <button class="btn btn-danger task-delete">Delete</button>
                   </td>
                </tr>
                `
             });
-            console.log(tasks);
             $('#tasks').html(template);
          }
       });
    }
+
+   // Delete on table
+   $(document).on('click', '.task-delete', function () {
+      if (confirm('Are you sure you want to delete it?')) {
+         let element = $(this)[0].parentElement.parentElement;
+         let id = $(element).attr('taskId');
+         $.post('task-delete.php', {id}, function (response) {
+            console.log(response);
+            fetchTasks();
+         });
+      }
+   });
+   
 
 });
