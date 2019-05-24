@@ -13,14 +13,15 @@
       
       <h1 id="title"></h1>
       <script>
+         // Requisição via AJAX
          function sendRequest() {
             var theObject = new XMLHttpRequest();
-            theObject.open('GET', 'backend.php', true);
+            theObject.open('POST', 'backend.php', true);
             theObject.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             theObject.onreadystatechange = function() {
                document.getElementById('title').innerHTML = theObject.responseText;
             }
-            theObject.send();
+            theObject.send('username=Rafael');
          }
       </script>
    </body>

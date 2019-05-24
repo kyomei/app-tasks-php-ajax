@@ -1,6 +1,8 @@
 <?php
 
-   echo "Hello World With AJAX";
+   if(isset($_POST)) {
+      echo "Recebido: ".$_POST['username'];
+   }
    
    
 
